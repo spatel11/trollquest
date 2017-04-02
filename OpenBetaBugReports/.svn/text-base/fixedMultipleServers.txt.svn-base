@@ -1,5 +1,0 @@
-From Ian:
-
-If a server is created and another server attempted to be created on the same port, both will crash.
-
-Stephen: Fixed.  If you enter a port that is already bound to an instance, the server will give the user an error message and terminate.

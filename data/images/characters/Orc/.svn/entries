@@ -1,47 +1,0 @@
-10
-
-dir
-670
-svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos/JWorld/data/images/characters/Orc
-svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos
-
-
-
-2011-12-15T22:01:26.016879Z
-662
-cs351project
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-fe25104c-199d-48ba-81eb-2c535b698216
-
-
-
-
-
-
-0
-
-attack
-dir
-
-die
-dir
-
-stand
-dir
-
-walk
-dir
-
