@@ -1,0 +1,13 @@
+From:	David Lochridge <mcmf_fett@hotmail.com>
+Subject:	No way to select spells beyond the first 10
+Date:	Sun, 11 Dec 2011 21:37:29 -0700
+To:	Stephen Patel <spatel11@unm.edu>
+
+
+1. Open TQ and select/make a character
+2. Kill 5 players
+3. Attempt to select spells 10/11/12
+
+Result: The spells above 9 cannot be selected
+
+Ian: Fixed.  Spells are now selected with arrow keys.

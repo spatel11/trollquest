@@ -1,0 +1,14 @@
+David
+mcmf_fett@hotmail.com
+
+1. Open TrollQuest
+2. Change to Client
+3. Enter more than 3 numbers for IP address (Max value should be 255)
+4. Hold shift and type numbers for the port (!@#$%^&*)
+5. Click Connect
+6. Click OK
+
+Result: Exception occurs, invalid IP and ports are accepted, invalid characters are accepted for port and IP.
+Expected Result: Only numbers should be accepted for IP/port, and the game should catch invalid IP/Port addresses before continuing to Username screen.
+
+Ian: Fixed.  IP/Port sanitizes input.

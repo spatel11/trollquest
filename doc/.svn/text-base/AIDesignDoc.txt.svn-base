@@ -1,0 +1,295 @@
+
+
+
+All test scripts located in data/NanoScripts/testScripts.
+All monster/npc strategies are located in data/NanoScripts/gameScripts.
+
+
+*****************                                                                              **************
+************************Script Writing instructions**********************************************************
+*****************                                                                            ****************
+All scripts have access to the following gameState fields:
+
+nearest.name (String)    furthest.name      random.name      self.name
+nearest.hp  (number)     furthest.hp        random.hp        self.hp      isAdjacent (boolean)
+nearest.mp  (number)     furthest.mp        random.mp        self.mp      players.inRange(# of player in range)
+nearest.class (String)   furthest.class     random.class     self.level
+nearest.moolah (number)  furthest.moolah    random.moolah    self.fullHP(#ofFullHP)
+nearest.level (number)   furthest.level     random.level
+nearest.fullHP(#ofFullHp) furthest.fullHP   random.fullHP
+
+These are all of the names of the fields in the VM. To get the values, a script
+can simply call them... e.g.
+
+script:
+
+x = furthest.hp; 
+adjacent = isAdjacent;
+
+if(isAdjacent == true){
+return("attack", "nearest.name")
+}
+ 
+!!!NOTE!!!
+All of these fields are immutable from the script EXCEPT isAdjacent. 
+"isAdjacent" CAN BE MODIFIED IN A SCRIPT. Doing so Is highly ill-advised.
+
+All Scripts MUST return an action with the following syntax:
+
+return action(String1, String2).
+
+String1 MUST be "move",  "attack", or "zot" (More Spells will be added later.)
+String2 MUST be "nearest.name", "furthest.name", or "random.name".
+
+
+Monsters/npcs do not have the capability of retreating. 
+
+Nearest Players are guaranteed to be in range, random and farthest are not.
+
+CreatureDef can be parsed and executed, but is not currently used in the game.
+
+
+********************                                                           ****************************
+********************INITIAL M1 DESIGN OVERVIEW*************************************************************
+***********************************************************************************************************
+
+PARTS:
+1. Lexing
+2. Parsing to an Abstract Syntax Tree(AST)
+3. Interpretation
+4. Interaction with game state.
+
+//////////////////////////////////////////////////////////////////LEXING:
+
+Handled by NanoLexer class. 
+Parts:
+NanoToken enum: described by a set of tokens given on pages 37,38 of spec.
+LexicalAnalyzer interface: from p1 support code.
+HasPattern interface: from p1 support code.
+NanoLexer class: implements LexicalAnalyzer.
+Token interface: from p1 support code. 
+
+These classes operate in the same general way as in p1. A NanoC file is passed 
+as a parameter into a NanoLexer constructor. A Pattern object is created that 
+encompasses all of the individual regex strings that define all of the NanoC 
+terminals. When the nextTok() method is called on a NanoLexer object, the 
+pattern object cycles through its list of regex. Expressions and returns a 
+match in the form of a Token() object. 
+
+//////////////////////////////////////////////////////////////PARSING:
+
+Handled by the NanoParser class.
+Parts:
+
+NanoParser class: implements Parser interface from p1.
+ASTCell interface: defines the shell of all nodes on the AST.
+
+The NanoParser holds a NanoLexer object. It cycles through the tokens returned
+in order and turns them into the non-terminals represented by concrete ASTCells.
+This is done through recursive decent parsing along the NanoC grammar. There are
+several concrete ASTCells that handle each individual type of behavior and token type.
+
+////////////////////////////////////////////////////////////INTERPRETATION
+
+Handled by the execute() methods inside each ASTCell, and the VM class that holds the 
+characteristics of each non-terminal created. 
+
+Parts:
+
+concrete ASTCell execute() methods: 
+return an ASTCell consisting of different data types.
+A VM object gets passed as a parameter through each execute method. In this way, one VM object holds
+can hold all off the variable, name,  data and define how each is created and accessed. 
+
+Each time an npc issues a command, their AST strategy tree is traversed. During this traversal
+of ASTCell nodes, a final decision is made and returned, concrete command is issued.
+
+The relation to the parsed trees and the way they are handled can be describes as a command pattern
+with the following members:
+
+ASTCell = command interface. has execute() method
+concrete ASTCells = define execute() method, what to return.
+AIHandler = receiver: action() command cycles through each npc/monster's AST to get a command
+to return to the game scheduler. 
+
+
+////////////////////////////////////////////////////INTERACTION WITH GAME STATE
+
+The AIHandler object is the first "player" in the game. It is initialized at
+startup. Once initialized, a thread starts that cycles through all of the existing
+monster/npc.execute() methods and continues through duration of game play. This cycle 
+can be considered the "action()" method in the above command pattern structure.
+
+The AIHandler has a reference to the VM, which holds a gameState reference. When an ASTCell
+needs to reference to any of the gameState fields(closest pc, pc health.. etc.), it gets the
+info from methods in the VM object it holds... e.g. vm.getHealth(pc1). 
+
+THREADING ISSUES: on all of the vm.get*() methods, the field being modified can potentially be
+referenced from multiple places. This can be handled by surrounding the field access section of
+each method with a synchronized(field){} block. Dead-lock is not an issue on these blocks because
+nothing will ever lock onto the AIHandler. 
+
+
+CYCLE: AIHandler cycles through every monster/npc object, calling the execute()
+method in each. This triggers a call to ONE static AST at some index AST[i].
+
+each monster/npc.execute() method will:
+
+-traverse tree AST[i], calling vm.get*() methods to direct traversal.
+-when leaf of AST[i] is reached, a command has been decided.
+-command is passed to the Scheduler object.
+-move on to next monster/npc and repeat.
+-wait some unit of time (to be decided)
+-repeat
+
+********************************                                                   ***********************
+****************************************FINAL DESIGN******************************************************
+
+///////////////////////////////////////////////// LEXING
+  - same design as m1 outlined. 
+  
+//////////////////////////////////////////////////PARSING
+  -Changed classes slightly. 
+
+AbstractNanoParser : Handles all expect(*), and consume(*) methods for NanoParser
+
+NanoParser : starts with parse() method, Builds an abstract syntax tree from individual parse methods 
+             for each defined non-terminal by means of recursive descent parsing. Contains enumSets of
+             non-terminals that contain solely terminal tokens for easier access. Contains an infixOpSel()
+             method that returns a specific concrete ASTCell based on which operator is passed in.
+             
+ASTCell: The interface for all concrete ASTCells. contains numVal(), stringVal(), boolVal(), print(). These
+         methods that return the respective value stored in the cell. Each concrete cell will implement only
+         one of these methods. The rest will be handled by an AbstractASTCell, that will return a null value.
+         Each concrete cell will also define its own execute() method. This method describes how the cell will
+         treat its internal data and store its execution in a VM object.
+         
+AbstractASTCell: This handles *Val() calls when a cell does not contain that value. It also overrides the
+                 Object.equals() method in order to correctly compare cells and their data.
+                 
+AST: This class is a wrapper for a Map<String, ASTCell> data structure. It adds functionality to this cell
+     by means of a private parseStrategy() method that the constructor calls. The goal of this method is to 
+     parse a file, and store the parsed AST inside the map with the file path name as the key. This allows
+     outside objects to access any parsed NPC strategy from an AST.executeStrategy() method. 
+
+//////////////////////////////////////////////////INTERPRETATION. 
+ -overall order and execution differ from m1. 
+ 
+All begins by calling AST.executeStragegy(String filepath, VM c)
+  This method calls the execute(VM c) method inside the stored ASTcell Value with the matched "filepath" key.
+  
+execute(): These methods access/create/manipulate all data to and from a passed down VM object.
+           These execute methods can create and assign a value to a field, perform a number of math operations,
+           and and retrieve external game state data.
+           
+VM : This object hold two distinct maps. _internals(String, ASTCell) and _externals(String, ASTCell).
+     an execute() method can either create a field, and return its name and value into _internals, or access
+     gameState data from _externals by sending in a specifically formatted string.
+     The VM is also responsible for retrieving and creating a specific commands to be scheduled. This is achieved
+     by a return action(String, String) statement all scripts must implement.
+     This statement sets the _command and _target field in the VM.
+     
+VM.getCommand() : This method takes the value of the _command field and tries to match it with a finite number
+                  of command instructions. It returns a ComparableCommand object that is put on the Schedule queue, 
+                  which completes the interpretatin process.
+
+
+/////////////////////////////////////////////////INTERACTION WITH GAME:
+  -steps more clearly defined.
+  
+script execution is now part of main game loop.
+The main loop executes a monster script by a call to the getMonsterStrategy() method
+in the same class as main loop.
+
+
+ -VM.loadPCs()  // this loads all the PC'S and locations in the VM.
+ -VM.loadSelf()// loads the current monster script, calculates all distances between relevant PC's, and creates
+                  all relevant entries in the _externals Map.
+ -AST.executeScript(path of current monster script) // accesses the parsed script and executes.
+ -VM.getCommand() // returns the command the executed script requested.
+ -VM.clearData() // clears VM data structures for next NPC script execution.
+ 
+ This sequence is repeated for all relevant NPC's on a map.
+ 
+This getMonsterStrategy() loop decides if a monster should or should not execute a strategy.
+The VM decides if players are in range of a monster.
+
+
+/////////////////////////////////////////////////TESTING STRATEGIES:
+
+There is 4 basic test classes for the interpretation process.
+
+1. TestLexer.. 
+    -One file with a long list of every possible token is analyzed
+        and matched with an array key containing correct answers.
+   
+    -Several tests operate on a single specific file that strings like tokens together and
+     determines if they are read correctly.
+   
+     -one test is used whenever a new script is written. It goes through the folder that holds
+      all scripts and ensures there are no tokens matching the last ".UNKNOWN" token.
+      
+2. TestParser...
+    -there is a test for each non-terminal type, or a combo of like types.
+     These tests work in generally the same way:
+              parse a script, execute it, match expected values stored in VM.
+   
+   -There is also a test for every complicated NPC script that does the same.
+   
+3. TestVM..
+   Stresses each method for correct output by parsing and executing a script with various
+   player/monster/npc locations. Tests several combinations for each game script.
+   
+4. TestAST...
+    Tests the correct parsing, containment and retrieval of all scripts. Only a few methods. Short test.
+    
+    
+/////////////////////////////////////////////////////Modification Justification:
+
+The main adjustments were to the VM, AST, and the way it interacts with the game..
+
+VM:
+
+   At the time of M1, I really had no idea how the VM was suppose to work. I just knew that it was
+ suppose to do everything I didn't understand yet. This is why the VM category was initially designed 
+ as vaguely as possible. Surprisingly enough, the vague description still almost holds. 
+ What the initial design fails to get across is the fact that the VM is doing work on either side of a 
+ script execution. It gets data necessary for the script to run, holds script data, 
+ then an outside method makes a getCommand() call to the VM to get the executed command. 
+ 
+ 
+ 
+AST: 
+  This class was never formally defined in M1. It was hinted at by notation like AST[i], leading client
+ to believe it was an array of scripts of some sort..
+ The final model AST class is a wrapper for a Map<String, ASTCell> which links a script file name to
+ a SequenceASTCell that is the result of a parse action of the script. This design is much improved because
+ it essentially parses and stores all scripts in one pass at run time. It also just needs to return an ASTCell
+ from not an index, but a filePath that is unique to each creature type. This is easier than remembering an 
+ index for each new creature in some kind of script array.
+ 
+ 
+ INTERACTION WITH GAME STATE:
+  Biggest overall change.. Initial design was creating an AIHandler class that, separate from the main loop, is 
+  constantly executing scripts and accessing game state. Final design has script execution inside main loop. This 
+  significantly drops threading issues, as well as gives the main loop more control over when to execute which monsters strategy. 
+  
+  The retrieval of a command no longer calls a Monster.execute() method that gets a command. it calls AST.execute with
+  the file name a monsters script, then calls VM.getCommand(). This is a much better design because AST and monster classes
+  need to do nothing more than store and deliver data upon request. Leaving the calculation to the VM where it is suppose to be.
+  private parts are all in VM. Much better design.
+  
+     
+
+
+   
+
+
+
+
+
+ 
+
+
+
+

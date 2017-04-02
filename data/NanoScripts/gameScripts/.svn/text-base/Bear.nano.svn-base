@@ -1,0 +1,16 @@
+delta = self.hp * 0.5 + nearest.hp * 0.5;
+
+
+target = "";
+command = "";
+
+if(isAdjacent == true){
+target = "nearest.name";
+command = "attack";
+return action(command, target);
+}
+  else{
+command = "move";
+target = "nearest.name";
+return action(command, target);
+}

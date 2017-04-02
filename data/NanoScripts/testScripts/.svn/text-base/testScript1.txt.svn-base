@@ -1,0 +1,20 @@
+
+someConstant = 0.5;
+someOtherConstant = - 0.3; 
+delta = self.hp * someConstant + pc.mp * someOtherConstant;
+threshold = 5;
+if(delta > threshold){
+ x = 1;
+ y = 2;
+ 
+}else{ x = -1; y = -2;}
+
+gamma = 33;
+while(gamma >= 0){
+
+beta = gamma - 2;
+
+gamma = gamma - 1;
+}
+
+return action(someConstant, someOtherConstant, delta, threshold, x, y, beta, gamma);

@@ -1,0 +1,15 @@
+From:	David Lochridge <mcmf_fett@hotmail.com>
+Subject:	Levelling up gives copies of the same spells
+Date:	Sun, 11 Dec 2011 23:26:34 -0700
+To:	Stephen Patel <spatel11@unm.edu>
+
+
+1. Open TQ and server
+2. Make a new Character/Select an already made one
+3. Level up
+
+Result: There is now an extra set of the first two spells
+Expected Result: Either new spells or no spells should be gained on level
+
+Taylor: Fixed.
+[11:54:43 PM] Taylor Berger: i wasnt checking to see if you had the spell in your inventory before trying to add the spell.

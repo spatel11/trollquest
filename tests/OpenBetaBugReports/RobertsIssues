@@ -1,0 +1,63 @@
+From:	Robert Williams <thorngrimm@yahoo.com>
+Subject:	mass bug report for TrollQuest1.3
+Date:	Mon, 12 Dec 2011 19:38:44 -0800 (PST)
+To:	"spatel11@unm.edu" <spatel11@unm.edu>
+
+
+Bug Report for initial playthrough of ~10mins
+
+
+
+-pressing up moves to a lower spell in the spell list for the wizard, when up should move up in the spell list.
+
+Taylor: Fixed, swapped the VK_UP for VK_DOWN and vice-versa
+
+
+-none of the spells have descriptions or costs, so the player is left guessing
+
+Stephen:  The PLAYERGUIDE will cover this.
+
+
+
+-spells are granted at level 2 that can not be cast due to lack of mana
+
+Stephen:  TROLL
+
+
+
+-casting 'fly' at level 3 wizard disables movement for the character (character just stands there and cant move anymore and mana doesnt 
+refill, but selecting spells and idle animation still work)
+
+Taylor: Have not been able to reproduce... Still trying to figure out why this happened
+
+-level 2 warrior attacking a level 1 spider cant hit for about 6-10seconds, then walks away, and dies instantly (huge lag?)
+
+Stephen:  You died before but were able to move around, so it SEEMED like you were still alive.  This has been fixed I believe.
+
+
+
+
+-no floating damage numbers, or any kind of notification that you are 'hitting' or even trying to hit the monste
+---are you supposed to x+click once, or spam x+click as fast as you can?, the manual or game doesnt explain either (swing timer kinda thing)
+
+Stephen:  Healthbars decrease when you do damage, PLAYERGUIDE has been updated accordingly.
+
+
+
+
+-Guide says that you start the game with some money, and basic equipment, but you dont.
+
+Stephen:  You do.
+Taylor: updated player guide does not include this information as it was incorrect.
+
+
+
+-'quest log' button opens up the 'inventory', as such there is no way to open the inventory.
+
+Stephen:  Fixed.  quest log now opens the quest log. 
+
+
+
+-neither wizard nor warrior when moving next to Harold recieve any sort of quest message
+
+Stephen: I could not reproduce this.  I believe it was fixed before I could test it.

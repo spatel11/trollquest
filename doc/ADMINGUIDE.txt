@@ -1,0 +1,11 @@
+ADMINGUIDE
+
+This guide details setting up the Standalone Server so that you may host it on your machine.  This guide assumes you have folder that contains the data directory
+and the TrollQuestStandAloneServer jar.
+
+Instructions:
+Double click the jar.  A dialog will appear asking for a port.  Enter the port you would like the server to run on (TrollQuest uses two ports, the one
+you specify, and that port plus one), and click ok.  If you entered an invalid port, or that port is in use, an error dialog will appear, otherwise
+a window will appear stating that the server is running.  If you close that window via the shutdown server button, or any other fashion, the server will
+shutdown.  Next, distribute your IP address, and the port you specified to your users.  You have successfully set up a TrollQuest Server.  If you would like
+to log in as an admin, start a client and for Username

@@ -1,0 +1,34 @@
+10
+
+dir
+670
+svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos/JWorld/data/NanoScripts
+svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos
+
+
+
+2011-12-16T02:35:49.989668Z
+670
+cs351project
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fe25104c-199d-48ba-81eb-2c535b698216
+
+gameScripts
+dir
+
+testScripts
+dir
+

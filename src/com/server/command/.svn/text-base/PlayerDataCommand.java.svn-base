@@ -1,0 +1,141 @@
+/**
+ * @author Stephen Patel (spatel11@unm.edu)
+ */
+package com.server.command;
+
+import java.awt.Point;
+
+import com.client.Message;
+import com.client.Graphics.AnimationsOfACharacter.ActionType;
+import com.game.characters.Creature.Stat;
+import com.game.characters.GameCharacter.Gender;
+import com.game.characters.Player;
+import com.game.environment.GameMap;
+import com.game.environment.tiles.TileException;
+import com.server.factory.classes.Profile;
+
+/**
+ * Adds a new Player to the game State.
+ * 
+ * @author Stephen Patel
+ * 
+ */
+public class PlayerDataCommand extends ComparableCommand {
+
+	/**
+	 * SerialVersionUID.
+	 */
+	private static final long serialVersionUID = 6204291358635496197L;
+
+	/**
+	 * The player to add.
+	 */
+	private final Player player;
+
+	/**
+	 * Creates a new {@link PlayerDataCommand} with the specifed
+	 * characteristics.
+	 * 
+	 * @param name
+	 *            the name of the {@link Player} to create.
+	 * @param gender
+	 *            the {@link Gender} of the Player to create.
+	 * @param clas
+	 *            the class of the Player to create.
+	 */
+	public PlayerDataCommand(String userName, Player p) {
+		super(userName, 0, 0, 0, true);
+		this.player = p;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PlayerDataCommand [");
+		if (player != null) {
+			builder.append("player=");
+			builder.append(player);
+			builder.append(", ");
+		}
+		if (charName != null) {
+			builder.append("charName=");
+			builder.append(charName);
+			builder.append(", ");
+		}
+		if (getClass() != null) {
+			builder.append("getClass()=");
+			builder.append(getClass());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+	/**
+	 * Determines whether the enclosed player can be added to the game. If the
+	 * player already exists, then this command is not valid.
+	 */
+	@Override
+	public boolean isValid() {
+		if (state.getCharacter(player.name) != null)
+			return false;
+		return true;
+	}
+
+	/**
+	 * Adds a player to the game state.
+	 */
+	@Override
+	public ComparableCommand execute() {
+		synchronized (state) {
+			Profile profile = state.getProfile(charName);
+			Player p = null;
+			if (profile == null) {
+				p = player;
+			} else {
+				p = profile.getPlayer(player.name);
+				if (p == null) {
+					p = player;
+					profile.addNewPlayer(p);
+				}
+			}
+			GameMap g = state.getGameMap(p.getMap());
+			Point spawn = g.getSpawnLoc();
+			try {
+				g.getTile(spawn.x, spawn.y).setOccupant(p);
+			} catch (TileException e) {
+				e.printStackTrace();
+			}
+			p.changeStat(Stat.HEALTHPOINTS, p.getBaseStat(Stat.HEALTHPOINTS));
+			System.err.println(Stat.HEALTHPOINTS + " "
+					+ p.getCurrStat(Stat.HEALTHPOINTS));
+			p.changeStat(Stat.MAGICPOINTS, p.getBaseStat(Stat.MAGICPOINTS));
+			System.err.println(Stat.MAGICPOINTS + " "
+					+ p.getCurrStat(Stat.MAGICPOINTS));
+			System.err.println(Stat.EXPERIENCE + " "
+					+ p.getCurrStat(Stat.EXPERIENCE));
+			System.err.println(Stat.LEVEL + " " + p.getCurrStat(Stat.LEVEL));
+			p.setSubX(0.0);
+			p.setSubY(0.0);
+			p.setSubXvel(0.0);
+			p.setSubYvel(0.0);
+			p.setActionState(ActionType.STAND);
+			state.addCharacter(p);
+			Message msg_add = new Message("SERVER", p.name
+					+ " has joined the game at location x=" + spawn.x + " y="
+					+ spawn.y);
+			msg_add.setComplete();
+			state.addMessage(msg_add);
+			if (state.getClient(charName) != null) {
+				state.getClient(charName).setUserName(charName);
+				state.getClient(charName).setPlayerName(p.name);
+				state.addCharNameToUserName(p.name, charName);
+			}
+		}
+		return null;
+	}
+}

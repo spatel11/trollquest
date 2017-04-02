@@ -1,0 +1,19 @@
+From:	Robert Poland <robert.poland@gmail.com>
+Subject:	TrollQuest Bug Report
+Date:	Wed, 14 Dec 2011 16:47:13 -0700
+To:	spatel11@unm.edu
+
+
+Name: Robert Poland
+Email: robert.poland@gmail.com
+Number of Players: 1
+
+Combat system needs some kind of indication when damage is taken or dealt. 
+ Currently the only indication of player damage taken is the health bar depleting.  
+ There is no way to know if an attack against a monster was successful.
+
+Suggestion: A piece of text (preferably red) could appear above the targeted monster denoting the damage dealt, 
+or the word "miss" if the attack missed.  As a further feature, successive hit/miss messages could scroll up 
+(up to a certain amount, maybe five or so) before disappearing.
+
+Stephen: Unfortunately, the Feature Freeze is upon us.  This will not be implemented.

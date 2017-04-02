@@ -1,0 +1,54 @@
+Joseph Collard gamepsychos@gmail.com to me
+show details 6:47 PM (10 minutes ago) 
+Yo yo yo!
+
+
+-Start game and click X. Game does not exit but asks for username and launches.
+
+Stephen:  Fixed, game now exits if you click the X.
+
+
+- Text in box does not wrap properly.
+
+Stephen:  Feature Freeze, this will not be fixed.
+
+
+- User guide is missing "it" gender choice.
+
+Stephen: It has it now.
+
+
+- As you level the spells do not work properly. I have several "Good Drugs" spells.
+
+Stephen: You can never have too many good drugs . . . KIDDING.  This has been fixed.
+
+
+- I can't tell if equipment is equipped or just in my inventory.
+
+Stephen: Stats panel now displays what you have equipped.
+
+
+
+- Attack animation is glitchy. I can't tell if I have to keep clicking to attack
+
+Stephen: Playerguide now explains that you must keep clicking.  
+
+
+
+- Client will leave java process running if it can't connect in which case it must be forcibly stopped
+
+Stephen: Fixed.  If you cannot connect, an error dialog will appear and then the program will terminate.
+
+
+- Can not connect to server from client through any non-localhost connection.
+
+Stephen: Could not reproduce.
+
+
+- Can't move with message box open
+- It would be nice to know if my attacking is doing anything.
+
+Stephen:  Agree, however the Feature Freeze is upon us.
+
+
+- Glitchy graphics when the JFrame is moved or resized

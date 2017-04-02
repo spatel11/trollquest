@@ -1,0 +1,13 @@
+Ian: the quests panel accurately reflects the current status of the player's quest.  Taylor contends that the quest 
+     events are being updated properly.  However, the quests panel isn't showing what we'd expect.  After some 
+     deliberation, it turns out that we're both right.  The problem is that, somehow, there are multiple copies of 
+     the player (at least, they have different references, and different quest pointers).  This is probably a 
+     networking thing.
+
+
+Taylor: Quest Panel is updating properly now. The two different players is normal since one would be on the server and 
+        the other on the client. There was no issue here as Ian thought. 
+        The fix came from both the attackCommand and MessageCommand, not properly updating the client's view of their
+        quests. I changed both the MessageCommand and AttackCommand to poll the listener's and attacker's (respectively to 
+        each command) current quest. Since Commands maintain the synchronization between the server and the client, the
+        quests had to be updated by their correct commands. 

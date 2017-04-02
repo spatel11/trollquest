@@ -1,0 +1,26 @@
+TESTING STRATEGIES EMPLOYED BY TROLLQUEST
+
+Integration Testing
+Integration Testing was accomplished primarily through play testing, and the open beta.  During the Beta period, we gave users a runnable jar, instructions,
+and asked them to play the game, and complete the main quest.  They were also instructed to submit any bugs they found by email.  These reports are located
+in JWorld/tests/OpenBetaBugReports.  We released three builds of TrollQuest during the beta, but were unable to release more due to the constraints of time.
+
+
+Unit Testing
+Unit tests for packages are located:
+/JWorld/src/com/server/test
+/JWorld/src/com/game/characters/test
+/JWorld/src/com/game/environment/test
+/JWorld/src/com/game/items/test
+/JWorld/src/com/game/quest/test
+/JWorld/src/com/ai/test
+
+
+Manual Testing
+Manual tests for network interaction, and the GUI are located:
+/JWorld/src/com/server/test
+/JWorld/src/com/client/TestGui.txt
+
+Other Testing
+This is just a main method that checks to make sure that a client can connect to a server.
+/JWorld/src/com/server/test/TestClientServer.java

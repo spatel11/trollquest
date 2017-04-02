@@ -1,0 +1,12 @@
+a = 5 == 4.0;
+b = 4 == 4.0;
+c = a == b;
+d = a == a;
+e = d == b;
+f = "martin" == "martin";
+g = "martin" == "MARTIN";
+h = 4e5;
+i = true;
+j = false;
+x = 4;
+k = (7*x) + 5/1*33;

@@ -1,0 +1,41 @@
+Bugs found by Ian: 12/13
+
+Ian: Dead monsters sometimes follow you around.  They don't appear to be able to hurt me.
+Taylor: Currently unresolved. as for the other one, it has something to do with the cast command.
+        If you kill a monster with a spell there is a chance it doesnt die properly. I've checked and 
+        rechecked the differences between the spell commands vs the attackCommand and I cannot pinpoint
+        the bug. I will continue looking it over after i fix a few other bugs.
+Stephen: Fixed.  The problem was that the cast commands were doing different amounts of damage on the client and server.  
+Taylor: Really fixed. The problem was the above, but what we thought would fix it did not. I moved
+        damage calculation to the CastCommand instead of each individual spell and that
+        seemed to maintain synchronization between the server and client.    
+
+
+Ian: When attempting to cast Open on something not a portal:
+Exception in thread "Timer-1" java.lang.ClassCastException: com.game.environment.tiles.terrain.TileForest cannot be cast to com.game.environment.tiles.terrain.TilePortal
+	at com.game.characters.spells.Open.cast(Open.java:44)
+	at com.server.command.CastCommand.execute(CastCommand.java:65)
+	at com.server.GameScheduler.executeCommands(GameScheduler.java:168)
+	at com.server.GameScheduler.gameIteration(GameScheduler.java:223)
+	at com.server.GameScheduler.run(GameScheduler.java:140)
+	at java.util.TimerThread.mainLoop(Unknown Source)
+	at java.util.TimerThread.run(Unknown Source)
+Taylor: Open is a result of the way we refactored the casting commands. I will go back and change that now.
+
+Ian:
+Exception in thread "Timer-1" java.lang.IndexOutOfBoundsException: Index: 1, Size: 0
+ at java.util.LinkedList.checkElementIndex(Unknown Source)
+ at java.util.LinkedList.get(Unknown Source)
+ at com.ai.VM.getCommand(VM.java:669)
+ at com.server.GameScheduler.getMonsterMoves(GameScheduler.java:242)
+ at com.server.GameScheduler.gameIteration(GameScheduler.java:221)
+ at com.server.GameScheduler.run(GameScheduler.java:140)
+ at java.util.TimerThread.mainLoop(Unknown Source)
+ at java.util.TimerThread.run(Unknown Source)
+ 
+ Taylor: I received this bug as well. This was after I ported to another map. A monster 
+ was moving towards me at the time Ported, then the games graphics starting moving rather
+ rapidly and after I moved about 10 squares I got this exception.
+
+Ian:
+There's still a BUGS list in doc/

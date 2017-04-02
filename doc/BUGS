@@ -1,0 +1,18 @@
+BUGS (ROLLOUT)
+
+Panel for interacting with a Merchant does not work.
+Reset Time does not actually affect anything.
+Occasionally, the GUI will freeze.  This is fairly uncommon however
+
+
+UNIMPLEMENTED FEATURES
+
+Spell animations
+Buying/Selling from Merchants
+Range casting (Spells have range, but the gui only supports casting on adjacent tiles)
+
+
+TROLLS
+Invisible Mountain Tile
+Trollchant keeps shouting at you until you are out of range
+The Swag names are pretty funny, but there are no tooltips so you can't see them.

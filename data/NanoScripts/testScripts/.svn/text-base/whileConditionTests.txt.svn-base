@@ -1,0 +1,16 @@
+while(){;}
+while(x){;}
+while(true){;}
+while(false){;}
+while(true && false){;}
+while(true && true){;}
+while(true || false){;}
+while(true && true || false && false){;}
+while(x = 5){;}
+while(y = true){;}
+while(m = "martin"){;}
+while(x = 7 && y = 6){;}
+while(x < 5 && y > 3){;}
+while(x == 5 && y == 3){;}
+while(x <= 5 && y >= 3){;}
+while(x != 5 && y != 3){;}

@@ -1,0 +1,9 @@
+BUGS (ROLLOUT)
+
+Spell book icon just brings up the Inventory.
+State does not serialize on Ians laptop? (we don't know why, it works everywhere else).
+Cast and move (together) does not completely work.
+When logged in as an Admin(username: Pwner), each step is equivalent to one iteration, which happens every millisecond.  So you have to hold down S for 
+a long time to see changes.
+Spell animations do not function.
+An occasional TileException is thrown when you are moving, and then you die and respawn, but a monster is occupying your respawn location.

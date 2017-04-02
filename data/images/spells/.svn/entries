@@ -1,0 +1,40 @@
+10
+
+dir
+670
+svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos/JWorld/data/images/spells
+svn+ssh://cs351project@bergerrggate.dyndns.org/home/cs351project/JWorldRepos
+
+
+
+2011-11-23T02:29:57.835425Z
+257
+cs351project
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fe25104c-199d-48ba-81eb-2c535b698216
+
+fireball
+dir
+
+icicle
+dir
+
+shield
+dir
+
+shock
+dir
+

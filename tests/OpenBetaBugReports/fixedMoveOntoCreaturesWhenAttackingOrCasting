@@ -1,0 +1,13 @@
+David
+mcmf_fett@hotmail.com
+
+1. Start TQ
+2. Connect/start a character
+3. Go to some monsters
+4. Place cursor over the monster, but don't attack
+
+Result: The box on the grid disappears while the monster is animating, clicking at the incorrect time causes the player to attempt to walk into that square
+
+Stephen: The box disappearing is intended.  But moving onto the Creature when attacking or casting is not.
+
+Ian: Fixed.  Subtle bug someone else introduced into my code.  

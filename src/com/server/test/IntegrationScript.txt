@@ -1,0 +1,16 @@
+INTEGRATION TEST SCRIPT FOR TROLLQUEST
+Fall 2011-CS351-Stephen Patel, Taylor Berger, Martin Tice, Ian Mallett
+
+This script is to be distributed with initial releases of TrollQuest.  The user should execute this script, and log any problems, or suggestions for enhancements.
+After executing this script, the user should play the game.  Complete the Quest, kill monsters, explore, etc, all while logging any problems.  If possible test with
+multiple users.  This log should be returned to spatel11@unm.edu, along with the following information:
+Name, email, and maximum number of users playing simultaneously.  Please be detailed when describing problems.  It doesn't help us fix a problem, if all we know is that
+"it doesn't work."  Ideally, we would like the following information when you log a bug:
+
+What was happening when the bug occurred.
+Steps to reproduce the bug.
+Observations about the bug.  Perhaps it only occurs on a certain map or with a certain character, or maybe it happens inconsistently.
+
+We understand that it is not always possible to provide a great deal of detail, especially with inconsistent bugs, but please provide as much as you can.
+
+The PLAYERGUIDE will walk you through the first few steps in the Main quest, so follow along, and then continue with the quest.

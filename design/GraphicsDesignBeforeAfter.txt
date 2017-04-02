@@ -1,0 +1,21 @@
+=== Graphics ===
+
+Originally, the graphics were intended to be a plugin to the Game Mechanics.  When updated with new infomation, the Graphics would poll the Game Mechanics for information about the current game's state.  In the final version, the graphics doesn't wait for the game mechanics to be updated.  Instead, the graphics constantly polls the game state on its own thread.  This allows the graphics to be almost completely independent from the networking, and allows graphics changes to be made even while the game's state is constant (for example, animations of standing).
+
+The Graphics are implemented as two major classes: an abstract graphics class that handles basic commands and overall structure, and a concrete class that handles some of the implementation details of rendering.  The original aim was to completely separate the two, but, as it became increasingly clear that the GPU implementation was not practical (or even necessary), the classes started mixing.  Most of the work is actually handled in the abstract graphics, with only a few things done in the concrete graphics class.
+
+The original design called for the abstract graphics has a draw method, which invokes abstract methods, like drawHUD and drawTerrain, which are implemented by the concrete renderer(s).  This actual implementation developed in exactly this way.
+
+=== GUI ===
+
+The GUI was originally designed to be a set of classes within the graphics.  Each class would handle a small part of drawing the GUI, with the less complicated elements being drawn as actual methods of the abstract graphics.  This design was improved by casting *every* GUI component to be its own class.  In many cases, these classes had subcollections of children.  Every GUI component ended up being part of a class hierarchy of different GUI components.  Most significant positioning was handled as relative offsets from a component's parent component.
+
+The whole Graphics resides inside of a Swing context.  The Swing context handles providing a window, containing a single canvas.  Display updates are handled by a Timer that sends refresh commands in accordance with the frame rate.  This design was relatively unchanged (only a double-buffered context was set up).
+
+=== User Input ===
+
+Originally, the user input was intended to be captured by Swing, and then processed by Main.  As Main became more complicated, a separate class was created specifically for handling input.  The commands are executed on their own thread, as originally planned, with this thread being the client listener.  This allows commands to execute and be seen as they are executing, which is important for animation.
+
+As planned, the player is controlled primarily with the mouse.  Users click on the square they would like to travel to, and the player will find its own way there, if possible.  By holding down a given key while doing this, players are able to attack or cast or otherwise interact with the object in the ending square.
+
+For example, if "x" is held down, and the user clicks on a monster three squares away, the user's player will move until it is adjacent to the monster, and then attack it.  If "c" (originally, "z"?) is instead held down when the user clicks on the monster, the user's player will approach the monster and then cast the currently selected spell on it.  It was speculated that ranged attacks might not be implemented.  It turns out they weren't.  Players can click on spaces that are vacant to simply move there.

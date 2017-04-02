@@ -1,0 +1,6 @@
+Brandon Lites
+blites@unm.edu
+
+Bug happened before I even started playing. Clicking the "X" button on th "Enter IP and Port" menu still brings up the "Enter Username" menu instead of quitting.
+
+Ian: Fixed.  "X" now closes program.

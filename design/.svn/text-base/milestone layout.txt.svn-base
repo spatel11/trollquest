@@ -1,0 +1,38 @@
+m1:
+wed nov9th
+-tile Set
+-Design/schemes
+-Reasons of design(principles, patterns)
+-Plot?
+-Name?
+-Skeleton code?
+
+
+M2:
+Sunday 20th Nov
+11:59pm
+doc saturday
+-client/server
+-GUI sending info
+-Lexing/parsing
+-tests for known methods
+
+
+M3:
+Sunday 4th Dec
+11:59pm
+doc saturday
+-ai able to generate AST tree from NanoC file.
+-Login, create character
+-Retrieve Player stats
+-Quest Scripts
+
+FEATURE FREEZE tues 13th.
+
+ROLL:
+Dec 16th, Friday
+9:00 am
+-finalize user doc
+-bug squashing
+-play testing
+Party down.

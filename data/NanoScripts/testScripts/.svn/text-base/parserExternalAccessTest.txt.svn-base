@@ -1,0 +1,29 @@
+a = 1;
+b = 1;
+c = 1;
+d = 1;
+e = 1;
+f = 1;
+g = 1;
+h = 1;
+i = 1;
+j = 1;
+l = 1;
+
+a = self.hp;
+b = self.mp;
+
+c = nearest.hp;
+d = nearest.mp;
+e = nearest.moolah;
+f = nearest.class;
+
+g = farthest.hp;
+h = farthest.mp;
+i = farthest.moolah;
+j = farthest.class;
+
+k = random.hp;
+l = random.mp;
+m = random.moolah;
+n = random.class;

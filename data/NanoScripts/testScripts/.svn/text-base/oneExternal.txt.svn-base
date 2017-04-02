@@ -1,0 +1,2 @@
+a = self.hp;
+self.hp = 5;

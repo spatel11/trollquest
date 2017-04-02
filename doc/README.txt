@@ -1,0 +1,30 @@
+TROLLQUEST README
+
+UserDoc is located in doc/PLAYERGUIDE.txt || doc/PLAYERGUIDE.pdf
+AdminDoc is located in doc/ADMINGUIDE.txt
+Known Issues are located in doc/BUGS.txt
+SVNLogs are located in doc/svnLOG.txt
+Credits are located in doc/Credits.txt
+
+
+//compile,configure, install JWorld program suite including how to construct the .jar file from raw source. 
+****************                                                                         *****************
+***********************COMPILATION INSTRUCTIONS **********************************************************
+!!!MUST have java 1.7 in order to run!!!!!!!!!
+
+// to export .jar file
+       -file/export/java/jar file
+       -check the entire JWorld/src file
+       -check only export generated class files and resources
+         -can also check compress contents of JAR file and Overwrite existing files without warning
+         -do not check addDirectory entries
+       -choose destination and name what you wish, as long as it is *.jar file
+       -check export w compile errors and warnings
+       -check generate manifest file, Seal some classes.
+       -Select main class as "Main" (or StandaloneServerMain if wish to run Standalone Server)
+       
+ // to run game
+      - copy and paste the data file and the exported .jar file into one folder.
+      - double click on the .jar file. 
+      -enjoy TrollQuest 
+      

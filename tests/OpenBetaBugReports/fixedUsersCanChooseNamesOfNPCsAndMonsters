@@ -1,0 +1,16 @@
+David
+mcmf_fett@hotmail.com
+
+1. Open TQ client/server
+2. Connect to a server
+3. Attempt to name yourself after a monster, e.g. Spider1 or Bear4
+
+Result: ClassCastException com.game.characters.content.monsters.* cannot be cast to com.game.characters.Player
+                      at com.client.Main.getSelf(Main:58)
+And the main game window freezes
+
+If you want more of the trace, I can get it for you... My command prompt isn't letting me copy the text.
+
+
+Stephen: Fixed. The get self method in the UI did not check to make sure that an entered name wasn't already in the game. 
+Now, if you enter a name of a player that already exists, or the name of a non Player, the ui will bring up the player create screen again.

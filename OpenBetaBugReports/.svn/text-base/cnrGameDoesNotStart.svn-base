@@ -1,0 +1,12 @@
+On Sun, 11 Dec 2011 13:15:51 -0700
+ "Brandon Lites" <blites@unm.edu> wrote:
+Brandon Lites
+blites@unm.edu
+
+Upon trying to connect to TrollQuest via IP "76.113.61.45" port 1337, game never starts up, however process stays running in background.
+
+
+Stephen:  Could Not Reproduce. It takes some time to start the game, Joe and I experienced times of up to 30 seconds. But we did connect successfully.  It is also 
+possible that Joe shutdown the server.  Please try again with the latest build, send me an email if you still experience problems.
+
+Taylor: The port number is wrong. I believe Joe's port number is 5000 unless he changed it.

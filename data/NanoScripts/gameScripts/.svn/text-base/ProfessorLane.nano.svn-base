@@ -1,0 +1,77 @@
+zotCost = 3;
+goodCost = 8;
+
+
+lowHealthNearest = nearest.fullHp / 4;
+
+lowHealthSelf = self.fullHp  / 4;
+medHealthSelf = self.fullHp  / 2;
+highHealthSelf = self.fullHp * 0.75;
+
+
+if(self.hp <= lowHealthSelf){
+
+   if(isAdjacent == true){
+   
+       if(self.mp > goodCost){
+         target = "self.name";
+         command = "cast";
+         castChoice = 1;
+         return action(command, target);
+       }else{
+          target = "nearest.name";
+          command = "attack";
+          return action(command, target);
+       }
+       
+   }else{
+      command = "move";
+      target = "random.name";
+      return action(command, target);
+    }
+    
+}
+
+if(self.hp > lowHealthSelf &&  self.hp <= medHealthSelf ){
+   
+   if(isAdjacent){
+   
+      if(self.mp > zotCost){
+         target = "self.name";
+         command = "cast";
+         castChoice = 0;
+         return action(command, target);
+      }else{
+        target = "nearest.name";
+        command = "attack";
+        return action(command, target);
+      }
+   }else{
+      command = "move";
+      target = "random.name";
+      return action(command, target);
+   }
+               
+}
+
+if(self.hp > medHealthSelf ){
+
+   if(isAdjacent){
+   
+      if(self.mp > zotCost){
+         target = "self.name";
+         command = "cast";
+         castChoice = 0;
+         return action(command, target);
+      }else{
+        target = "nearest.name";
+        command = "attack";
+        return action(command, target);
+      }
+      
+   }else{
+      command = "move";
+      target = "random.name";
+      return action(command, target);
+   }
+}

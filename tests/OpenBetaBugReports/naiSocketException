@@ -1,0 +1,12 @@
+From:	David Lochridge <mcmf_fett@hotmail.com>
+Subject:	Exception on closing client
+Date:	Sun, 11 Dec 2011 22:12:48 -0700
+To:	Stephen Patel <spatel11@unm.edu>
+
+
+1. Open client, connect to a server
+2. Close client (Ragequit, hit X, ctrl+C in command window)
+
+Result: Missing Socket Connection exception
+
+Stephen:  Not An Issue.  This is expected. Currently all exceptions, even the ones that are correctly handled are logged.

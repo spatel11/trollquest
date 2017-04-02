@@ -1,0 +1,32 @@
+Artwork comes from:
+-OpenGameArt.org
+-http://autumnforestghosthunter.blogspot.com/2009/11/hopi-legend-portal-between-worlds.html
+-Scroll: Endymian www.gamersuniversity.com
+
+Font:
+-http://www.exljbris.com/fontin.html
+
+Game development by:
+Ian Mallett - Graphics, GUI
+Taylor Berger - Game Content, Game Mechanics, Game Engine, Graphics
+Stephen Patel - Networking, Game Engine
+Martin Tice - NanoC Scripting and Interpreter
+
+
+Internal Testers:
+Stephen Patel
+Taylor Berger
+Martin Tice
+Ian Mallett
+
+External Testers:
+Brandon Lites
+David Lochridge
+Brian Kraus
+Joseph Collard
+Robert Williams
+Robert Poland
+Justin Becker
+
+
+Special thanks to all of our beta testers!

@@ -1,0 +1,12 @@
+David
+mcmf_fett@hotmail.com
+
+1. Open TrollQuest
+2. Create/load a character
+3. Press the S key
+4. Click somewhere
+
+Result: Character gets stuck, can no longer move. Occurs with both client and server instances.
+
+Stephen:  Fixed.  MainHandlerInput was waiting for the command to come back from the server, which it doesn't.  Changed the handling of the single step command
+so that it no longer waits for it to come back.

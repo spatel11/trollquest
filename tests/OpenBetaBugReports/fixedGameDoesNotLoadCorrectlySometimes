@@ -1,0 +1,24 @@
+From:	Robert Poland <robert.poland@gmail.com>
+Subject:	TrollQuest Bug Report
+Date:	Thu, 15 Dec 2011 07:32:57 -0700
+To:	spatel11@unm.edu
+
+
+Name: Robert Poland
+Email: robert.poland@gmail.com
+Number of Players: 1
+
+The game seems unable to load after a time.
+
+How To Reproduce:
+1. Double-click TrollQuest.jar
+2. Start a server with the default settings
+3. Enter user name
+4. After an extremely long time (more than 60 seconds), a blank window pops up.  After about 30 seconds, the window closes itself 
+and the game is no longer running, according to Windows Task Manager.
+This is the second time it has happened, and it only seems to happen when I use the Esc key followed by the RAGE QUIT option to 
+exit the game.  When I simply close the window, I don't have this problem.  It is also frustratingly inconsistent.  The first time 
+it happened, I deleted the entire folder and re-extracted the .rar file.  I used the RAGE QUIT option several times, and it seemed to 
+work fine.  The next day it happened again.  Changing the port number seems to help.
+
+Stephen:  This should be fixed.  We believe it was caused by compressed profiles, and errors during state serialization.

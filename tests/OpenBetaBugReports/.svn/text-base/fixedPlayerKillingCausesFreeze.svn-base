@@ -1,0 +1,10 @@
+David
+mcmf_fett@hotmail.com
+
+1. Connect to server with another person
+2. Kill someone else (Non-monster)
+
+Result: GUI freezes
+
+Stephen: Fixed I think. There were a bunch of synchronized methods in the Loot object that I believe were causing deadlock. 
+Please keep an eye out for this issue in the future though.

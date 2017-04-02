@@ -1,0 +1,85 @@
+
+zotCost = 3;
+goodCost = 8;
+fireCost = 2;
+
+lowHealthNearest = nearest.fullHp / 4;
+
+if(self.level <= 2){
+
+   if(isAdjacent == true){
+      target = "nearest.name";
+      command = "attack";
+      return action(command, target);
+   }
+    else{
+      command = "move";
+      target = "nearest.name";
+      return action(command, target);
+    }
+
+}
+
+if(self.level > 2 && self.level <= 5){
+
+   if(nearest.level <= self.level){
+   
+       if(isAdjacent == true){
+           target = "nearest.name";
+           command = "attack";
+           return action(command, target);
+      }else{
+           command = "move";
+           target = "nearest.name";
+           return action(command, target);
+        }
+        
+   }else{
+       if(self.mp >= fireCost){
+          if(isAdjacent == true){
+            target = "nearest.name";
+            castChoice = 3;
+            command = "cast";
+            return action(command, target);
+          }else{
+             command = "move";
+             target = "nearest.name";
+             return action(command, target);
+           }
+       }else{
+             command = "attack";
+             target = "nearest.name";
+         return action(command, target);
+       }
+    }
+}
+
+if(self.level > 5){
+
+   if(isAdjacent == true){
+   
+     if(nearest.hp < lowHealthNearest){ 
+         command = "attack";
+         target = "nearest.name";
+         return action(command, target);
+     }else{
+     
+        if(self.mp >= zotCost){
+          castChoice = 0;
+          command = "cast";
+          target = "nearest.name";
+          return action(command, target);
+        }else{
+             command = "attack";
+             target = "nearest.name";
+           return action(command, target);
+         }
+         
+      }
+   }else{
+           command = "move";
+           target = "nearest.name";
+           return action(command, target);
+   }
+}
+
