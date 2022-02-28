@@ -1,3 +1,0 @@
-constructor "BadAsh" BadAshHp = 50;
-policy BadAshSpell = "punch";
-finalizer BadAshDie = "shotgunToFace";

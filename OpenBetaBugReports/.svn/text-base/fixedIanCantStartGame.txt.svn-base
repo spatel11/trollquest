@@ -1,3 +1,0 @@
-I can almost never get the game to start.  Maybe 5%-10% of the time.  Considering it already takes like ten seconds to start, this makes it REALLY hard to debug.  Appears to be a probelm with threading/object writing.
-
-Ian: Fixed.  Figured it out and patched the fix in singlehandedly.  The problem had to do with buffer sizes, and, contrary to the group's opinion, it WOULD have been a problem on some other machines.  The problem has been solved in the best way that is possible using socket technology, and is either far less likely to occur or impossible.

@@ -1,4 +1,0 @@
-if(isAdjacent == true){
-return action("talk", "nearest.name");
-}else{ return action("noTalk", "nearest.name");}
-
